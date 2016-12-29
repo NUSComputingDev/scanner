@@ -1,0 +1,12 @@
+.idea/
+gradle/
+build/
+lib/
+out/
+build/*
+out/*
+
+*.class
+*.soccat
+/src/main/java/scanners/APDUCommands.java
+

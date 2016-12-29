@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.*?>
+<VBox alignment="CENTER_LEFT" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ui.controllers.ScanNodeController">
+    <children>
+        <HBox alignment="TOP_RIGHT">
+            <children>
+                <Label id="cell-date-time" fx:id="dateTimeStamp" alignment="BOTTOM_RIGHT" contentDisplay="RIGHT"
+                       maxWidth="1.7976931348623157E308" text="Date-Time" textAlignment="RIGHT">
+                </Label>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER_LEFT">
+            <children>
+                <!--<Circle id="cell-index-tag" fx:id="indexTag" fill="#6fafeb" radius="20.0" stroke="#6795c6" strokeType="INSIDE">-->
+                    <!--<HBox.margin>-->
+                        <!--<Insets bottom="5.0" right="5.0" top="5.0"/>-->
+                    <!--</HBox.margin>-->
+                <!--</Circle>-->
+                <VBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="SOMETIMES">
+                    <children>
+                        <TextFlow fx:id="nameArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                            <children>
+                                <Text id="cell-name" fx:id="name" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="NAME">
+                                </Text>
+                            </children>
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </TextFlow>
+                        <Label id="cell-matric-number" fx:id="matricNumber" maxWidth="1.7976931348623157E308" text="Matric Number">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0"/>
+                            </VBox.margin>
+                        </Label>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" maxWidth="1.7976931348623157E308">
+                    <children>
+                        <Label id="cell-access-code" fx:id="accessCode" alignment="CENTER" contentDisplay="CENTER"
+                               maxWidth="1.7976931348623157E308" text="000" textAlignment="CENTER">
+                            <HBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <Separator id="cell-separator" prefWidth="200.0">
+            <VBox.margin>
+                <Insets top="5.0"/>
+            </VBox.margin>
+        </Separator>
+        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+            <children>
+                <TextFlow fx:id="detailsArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                          HBox.hgrow="NEVER">
+                    <children>
+                        <Text id="cell-details" fx:id="details" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+                              text="Details" textAlignment="JUSTIFY">
+                        </Text>
+                    </children>
+                    <HBox.margin>
+                        <Insets top="5.0" left="5.0"/>
+                    </HBox.margin>
+                </TextFlow>
+            </children>
+        </HBox>
+    </children>
+</VBox>

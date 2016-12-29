@@ -1,0 +1,42 @@
+group 'NSCC.SoCScanner'
+version '1.0'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'SoCScanner',
+                'Implementation-Version': 1.0,
+                'Main-Class': 'main.SoCScanner'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'SoCScanner'
+    }
+    baseName = 'SoCScanner'
+    version =  '1.0'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile([group: 'junit', name: 'junit', version: '4.11'])
+    compile ([group: 'com.intellij', name: 'annotations', version: '9.0.4'])
+    compile ([group: 'org.apache.poi', name: 'poi', version: '3.14'])
+    compile ([group: 'org.apache.poi', name: 'poi-ooxml', version: '3.14'])
+    compile ([group: 'de.jensd', name: 'fontawesomefx-commons', version: '8.13'])
+    compile ([group: 'org.jasypt', name: 'jasypt', version: '1.9.0'])
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}

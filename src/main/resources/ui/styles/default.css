@@ -1,0 +1,497 @@
+/* Color Template */
+
+/* default-theme
+ * --------------
+ * light-background:
+ * dark-background:
+ * light-accent:
+ * dark-accent:
+ * light-content:
+ * dark-content:
+ * light-focus:
+ * dark-focus:
+ * hint:
+*/
+
+/* Font: Roboto Family */
+
+@font-face {
+    /*font-family: Roboto-Black;*/
+    src: url("/ui/fonts/Roboto/Roboto-Black.ttf");
+}
+
+@font-face {
+    /*font-family: Roboto-BlackItalic;*/
+    src: url("/ui/fonts/Roboto/Roboto-BlackItalic.ttf");
+}
+
+@font-face {
+    /*font-family: Roboto-Bold;*/
+    src: url("/ui/fonts/Roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+    /*font-family: Roboto-BoldItalic;*/
+    src: url("/ui/fonts/Roboto/Roboto-BoldItalic.ttf");
+}
+
+@font-face {
+    /*font-family: Roboto-Italic;*/
+    src: url("/ui/fonts/Roboto/Roboto-Italic.ttf");
+}
+
+@font-face {
+    /*font-family: Roboto-Light;*/
+    src: url("/ui/fonts/Roboto/Roboto-Light.ttf");
+}
+
+@font-face {
+    /*font-family: Roboto-LightItalic;*/
+    src: url("/ui/fonts/Roboto/Roboto-LightItalic.ttf");
+}
+
+@font-face {
+    /*font-family: Roboto-Medium;*/
+    src: url("/ui/fonts/Roboto/Roboto-Medium.ttf");
+}
+
+@font-face {
+    /*font-family: Roboto-MediumItalic;*/
+    src: url("/ui/fonts/Roboto/Roboto-MediumItalic.ttf");
+}
+
+@font-face {
+    /*font-family: Roboto-Regular;*/
+    src: url("/ui/fonts/Roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+    /*font-family: Roboto-Thin;*/
+    src: url("/ui/fonts/Roboto/Roboto-Thin.ttf");
+}
+
+@font-face {
+    /*font-family: Roboto-ThinItalic;*/
+    src: url("/ui/fonts/Roboto/Roboto-ThinItalic.ttf");
+}
+
+@font-face {
+    /*font-family: RobotoCondensed-Bold;*/
+    src: url("/ui/fonts/Roboto/RobotoCondensed-Bold.ttf");
+}
+
+@font-face {
+    /*font-family: RobotoCondensed-BoldItalic;*/
+    src: url("/ui/fonts/Roboto/RobotoCondensed-BoldItalic.ttf");
+}
+
+@font-face {
+    /*font-family: RobotoCondensed-Italic;*/
+    src: url("/ui/fonts/Roboto/RobotoCondensed-Italic.ttf");
+}
+
+@font-face {
+    /*font-family: RobotoCondensed-Light;*/
+    src: url("/ui/fonts/Roboto/RobotoCondensed-Light.ttf");
+}
+
+@font-face {
+    /*font-family: RobotoCondensed-LightItalic;*/
+    src: url("/ui/fonts/Roboto/RobotoCondensed-LightItalic.ttf");
+}
+
+@font-face {
+    /*font-family: RobotoCondensed-Regular;*/
+    src: url("/ui/fonts/Roboto/RobotoCondensed-Regular.ttf");
+}
+
+/* Custom */
+
+#root-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 5;
+}
+
+#center-view {
+    -fx-background-color: #ECECEA;
+    -fx-background-radius: 0 10 10 0;
+}
+
+#menu-view {
+    -fx-background-radius: 0 10 0 0;
+    -fx-spacing: 8;
+}
+
+#sidebar-view {
+    -fx-background-color: #34495E;
+    -fx-background-radius: 10 0 0 10;
+}
+
+#sidebar-menu-combo {
+    -fx-spacing: 15;
+}
+
+#sidebar-title {
+    -fx-font-family: "Roboto Black";
+    -fx-font-size: 16px;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-fill: #E4F1FE;
+    -fx-font-size: 150%;
+}
+
+#sidebar-menu-label {
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 16px;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-text-fill: #E4F1FE;
+}
+
+#snackbar-view {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0 0 10 0;
+}
+
+#main-view {
+    -fx-background-radius: 0 10 10 0;
+    -fx-background-color: #ECECEA;
+    -fx-padding: -3 10 -3 -5;
+    -fx-box-border: transparent;
+    -fx-border-color: transparent;
+}
+
+#data-view {
+    -fx-background-radius: 0 10 10 0;
+    -fx-background-color: #ECECEA;
+    -fx-padding: -3 10 -3 -5;
+    -fx-box-border: transparent;
+    -fx-border-color: transparent;
+}
+
+#analytics-view {
+    -fx-background-radius: 0 10 10 0;
+    -fx-background-color: #ECECEA;
+    -fx-padding: -3 10 -3 -5;
+    -fx-box-border: transparent;
+    -fx-border-color: transparent;
+}
+
+#settings-view {
+    -fx-background-radius: 0 10 10 0;
+    -fx-background-color: #ECECEA;
+    -fx-padding: -3 10 -3 -5;
+    -fx-box-border: transparent;
+    -fx-border-color: transparent;
+}
+
+#close-button {
+    -fx-fill: #FC615D;
+    -fx-stroke: #DF423F;
+    -fx-stroke-width: 0.5;
+    -fx-stroke-type: inside;
+}
+
+#minimise-button {
+    -fx-fill: #FDBC40;
+    -fx-stroke: #DE9F34;
+    -fx-stroke-width: 0.5;
+    -fx-stroke-type: inside;
+}
+
+#maximise-button {
+    -fx-fill: #34C84A;
+    -fx-stroke: #29AB37;
+    -fx-stroke-width: 0.5;
+    -fx-stroke-type: inside;
+}
+
+#accept-button {
+    -fx-background-color: #000000,
+    linear-gradient(#8dc26f, #76b852),
+    linear-gradient(#8dc26f, #76b852),
+    linear-gradient(#8dc26f, #76b852);
+    -fx-background-insets: 0, 1, 2, 3;
+    -fx-background-radius: 3, 2, 2, 2;
+    -fx-padding: 8 16 8 16;
+    -fx-font-family: "Roboto Condensed Bold";
+    -fx-font-size: 14px;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-text-fill: #ECECEA;
+}
+
+#reject-button {
+    -fx-background-color: #000000,
+    linear-gradient(#e35d5b, #e53935),
+    linear-gradient(#e35d5b, #e53935),
+    linear-gradient(#e35d5b, #e53935);
+    -fx-background-insets: 0, 1, 2, 3;
+    -fx-background-radius: 3, 2, 2, 2;
+    -fx-padding: 8 17 8 17;
+    -fx-font-family: "Roboto Condensed Bold";
+    -fx-font-size: 14px;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-text-fill: #ECECEA;
+}
+
+#reject-button .Text {
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.8), 0, 0.0, 0, 1);
+}
+
+#list-view {
+    -fx-effect: innershadow(gaussian, #00000080, 75.0, 0.05, 0.0, 0.0);
+}
+
+#main-info-area {
+    -fx-background-color: #ECECEA;
+}
+
+#main-info-area-top {
+    -fx-background-color: #ECECEA;
+}
+
+#card-info-area {
+    -fx-background-color: #ECECEA;
+}
+
+#card-info-text-area {
+    -fx-background-color: #ECECEA;
+}
+
+#file-info-area {
+    -fx-background-color: #ECECEA;
+}
+
+#scan-result-info-area {
+    -fx-background-color: #ECECEA;
+}
+
+#statistics-area {
+    -fx-background-color: #ECECEA;
+}
+
+#matric-number-label {
+    -fx-font-family: "Roboto Bold";
+    -fx-font-size: 36px;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-text-fill: black;
+}
+
+#access-code-label {
+    -fx-font-family: "Roboto Condensed Bold";
+    -fx-font-size: 20px;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-text-fill: black;
+}
+
+#name-label {
+    -fx-font-family: "Roboto";
+    -fx-font-size: 24px;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-text-fill: black;
+}
+
+#degree-label {
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 16px;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-text-fill: black;
+}
+
+#year-label {
+    -fx-font-family: "Roboto Thin";
+    -fx-font-size: 14px;
+    -fx-font-style: italic;
+    -fx-font-weight: normal;
+    -fx-text-fill: black;
+}
+
+#status-label {
+    -fx-font-family: "Roboto";
+    -fx-font-size: 24px;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-text-fill: black;
+}
+
+#result-message {
+    -fx-font-family: "Roboto Condensed Light";
+    -fx-font-size: 12px;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-text-fill: #AEAEAE;
+}
+
+#status-icon {
+    -fx-opacity: 0.2;
+}
+
+#cell-date-time {
+    -fx-font-family: "Roboto";
+    -fx-font-size: 10px;
+    -fx-font-style: normal;
+    -fx-font-weight: bold;
+    -fx-text-fill: #AEAEAE;
+    -fx-fill: #AEAEAE;
+}
+
+#cell-name {
+    /*-fx-effect: innershadow(gaussian, #00000099, 4.0, 0.3, 0.0, 0.0);*/
+    -fx-font-family: "Roboto Bold";
+    -fx-font-size: 12px;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    /*-fx-text-fill: white;*/
+    /*-fx-fill: white;*/
+    -fx-text-fill: #AEAEAE;
+    -fx-fill: #AEAEAE;
+}
+
+#cell-matric-number {
+    /*-fx-effect: innershadow(gaussian, #00000099, 4.0, 0.3, 0.0, 0.0);*/
+    -fx-font-family: "Roboto Condensed";
+    -fx-font-size: 10px;
+    -fx-font-style: normal;
+    -fx-font-weight: bold;
+    /*-fx-text-fill: white;*/
+    -fx-text-fill: #AEAEAE;
+    -fx-fill: #AEAEAE;
+}
+
+#cell-access-code {
+    -fx-font-family: "Roboto Condensed Bold";
+    -fx-font-size: 20px;
+    -fx-font-style: normal;
+    -fx-font-weight: bold;
+    -fx-text-fill: #AEAEAE;
+}
+
+#cell-details {
+    -fx-font-family: "Roboto Light";
+    -fx-font-size: 8px;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-text-fill: #AEAEAE;
+    -fx-fill: #AEAEAE;
+}
+
+#cell-separator .line {
+    -fx-border-color: derive(-fx-background, -30%) transparent transparent transparent;
+}
+
+/* Standard */
+
+.split-pane:horizontal > .split-pane-divider {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.split-pane:vertical > .split-pane-divider {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.list-view {
+    -fx-background-insets: 0;
+    -fx-background-color: #E4F1FE;
+    -fx-padding: 0.0 0.0 0.0 0.0;
+}
+
+.list-view:focused .list-cell:filled:selected {
+    -fx-background-color: #FC615D;
+    /*-fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);*/
+    /*-fx-background-radius: 5 5 5 5;*/
+}
+
+.list-view:focused .list-cell:filled:selected #cell-separator .line {
+    -fx-border-color: derive(white, -0%) transparent transparent transparent;
+}
+
+
+.list-view:focused .list-cell:filled:focused:selected #cell-date-time,
+.list-view:focused .list-cell:filled:focused:selected #cell-name,
+.list-view:focused .list-cell:filled:focused:selected #cell-details,
+.list-view:focused .list-cell:filled:focused:selected #cell-access-code,
+.list-view:focused .list-cell:filled:focused:selected #cell-matric-number {
+    -fx-fill: white;
+    -fx-text-fill: white;
+}
+
+.list-view:focused .list-cell:filled:selected #cell-date-time,
+.list-view:focused .list-cell:filled:selected #cell-name,
+.list-view:focused .list-cell:filled:selected #cell-details,
+.list-view:focused .list-cell:filled:selected #cell-access-code,
+.list-view:focused .list-cell:filled:selected #cell-matric-number,
+.list-view:focused .list-cell:filled:selected:hover #text,
+.list-view:focused .list-cell:filled:selected:hover #cell-name,
+.list-view:focused .list-cell:filled:selected:hover #cell-details,
+.list-view:focused .list-cell:filled:selected:hover #cell-access-code,
+.list-view:focused .list-cell:filled:selected:hover #cell-matric-number {
+    -fx-fill: white;
+    -fx-text-fill: white;
+}
+
+.list-view:focused .list-cell:filled:focused:selected:hover #cell-date-time,
+.list-view:focused .list-cell:filled:focused:selected:hover #cell-name,
+.list-view:focused .list-cell:filled:focused:selected:hover #cell-details,
+.list-view:focused .list-cell:filled:focused:selected:hover #cell-access-code,
+.list-view:focused .list-cell:filled:focused:selected:hover #cell-matric-number {
+    -fx-fill: white;
+    -fx-text-fill: white;
+}
+
+.list-view .scroll-bar:vertical .track {
+    -fx-opacity: 0.0;
+    -fx-padding: -12.0;
+    -fx-background-color: #E4F1FE;
+    -fx-border-color: #E4F1FE;
+    -fx-background-radius: 0.0em;
+    -fx-border-radius: 2.0em;
+}
+
+.list-view .scroll-bar:vertical .increment-button,
+.list-view .scroll-bar:vertical .decrement-button {
+    -fx-background-color: #E4F1FE;
+    -fx-background-radius: 0.0em;
+    -fx-padding: 0.0 5.0 0.0 0.0;
+}
+
+.list-view .scroll-bar .increment-arrow,
+.list-view .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0.0;
+}
+
+.list-view .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.list-view .scroll-bar .increment-button {
+    visibility: hidden;
+}
+
+.list-view .scroll-bar .decrement-button {
+    visibility: hidden;
+}
+
+.list-view .scroll-bar:vertical {
+    -fx-background-color: #E4F1FE;
+}
+
+.list-view .scroll-bar:vertical .track-background {
+    visibility: hidden;
+}
+
+.list-view .scroll-bar:vertical .track {
+    visibility: hidden;
+}
+
+.list-view .hide-thumb .scroll-bar:vertical .thumb {
+    -fx-background-color: #E4F1FE;
+}

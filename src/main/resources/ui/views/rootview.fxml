@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<SplitPane id="root-view" fx:id="rootView" dividerPositions="0.25" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.RootController">
+   <items>
+      <VBox id="sidebar-view" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0">
+         <children>
+                <HBox id="menu-view" fx:id="menu" alignment="CENTER_LEFT" prefHeight="30.0">
+                    <children>
+                        <Circle id="close-button" fx:id="closeButton" radius="7.0">
+                            <HBox.margin>
+                                <Insets left="8.0" />
+                            </HBox.margin>
+                        </Circle>
+                        <Circle id="minimise-button" fx:id="minimiseButton" radius="7.0" />
+                        <Circle id="maximise-button" fx:id="maximiseButton" radius="7.0" />
+                    </children>
+                </HBox>
+              <FlowPane id="sidebar-view" fx:id="sidebar" alignment="TOP_CENTER" hgap="15.0" maxWidth="200.0" prefWrapLength="200.0" rowValignment="TOP" vgap="15.0">
+                  <children>
+                      <ImageView fx:id="logo" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../images/org-logo.png" />
+                          </image>
+                          <FlowPane.margin>
+                              <Insets top="25.0" />
+                          </FlowPane.margin>
+                      </ImageView>
+                      <TextFlow fx:id="organisationNameArea" prefWidth="200.0" textAlignment="CENTER">
+                          <children>
+                              <Text id="sidebar-title" fx:id="organisationName" strokeType="OUTSIDE" strokeWidth="0.0" text="NUS Students' Computing Club" />
+                          </children>
+                          <FlowPane.margin>
+                              <Insets bottom="15.0" />
+                          </FlowPane.margin>
+                      </TextFlow>
+                      <HBox id="sidebar-menu-combo" fx:id="mainButton" alignment="CENTER_LEFT" prefWidth="200.0">
+                          <children>
+                              <ImageView id="sidebar-menu-icon" fx:id="mainButtonIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../images/sidebar-icon-main.png" />
+                                  </image>
+                              </ImageView>
+                              <Label id="sidebar-menu-label" fx:id="mainButtonLabel" text="Scan" />
+                          </children>
+                          <FlowPane.margin>
+                              <Insets left="30.0" />
+                          </FlowPane.margin>
+                      </HBox>
+                      <HBox id="sidebar-menu-combo" fx:id="loadSaveButton" alignment="CENTER_LEFT" prefWidth="200.0">
+                          <children>
+                              <ImageView id="sidebar-menu-icon" fx:id="loadSaveButtonIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../images/sidebar-icon-file.png" />
+                                  </image>
+                              </ImageView>
+                              <Label id="sidebar-menu-label" fx:id="loadSaveButtonLabel" text="Data" />
+                          </children>
+                          <FlowPane.margin>
+                              <Insets left="30.0" />
+                          </FlowPane.margin>
+                      </HBox>
+                      <HBox id="sidebar-menu-combo" fx:id="statisticsButton" alignment="CENTER_LEFT" prefWidth="200.0">
+                          <children>
+                              <ImageView id="sidebar-menu-icon" fx:id="statisticsButtonIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../images/sidebar-icon-stats.png" />
+                                  </image>
+                              </ImageView>
+                              <Label id="sidebar-menu-label" fx:id="statisticsButtonLabel" text="Statistics" />
+                          </children>
+                          <FlowPane.margin>
+                              <Insets left="30.0" />
+                          </FlowPane.margin>
+                      </HBox>
+                      <HBox id="sidebar-menu-combo" fx:id="settingsButton" alignment="CENTER_LEFT" prefWidth="200.0">
+                          <children>
+                              <ImageView id="sidebar-menu-icon" fx:id="settingsButtonIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../images/sidebar-icon-settings.png" />
+                                  </image>
+                              </ImageView>
+                              <Label id="sidebar-menu-label" fx:id="settingsButtonLabel" text="Settings" />
+                          </children>
+                          <FlowPane.margin>
+                              <Insets left="30.0" />
+                          </FlowPane.margin>
+                      </HBox>
+                  </children>
+              </FlowPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding>
+      </VBox>
+        <BorderPane id="center-view" fx:id="centerView">
+            <center>
+                <BorderPane fx:id="page" BorderPane.alignment="CENTER" />
+            </center>
+        </BorderPane>
+   </items>
+</SplitPane>

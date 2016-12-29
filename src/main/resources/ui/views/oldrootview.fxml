@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+<BorderPane id="old-root-view" fx:id="oldrootview" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <left>
+        <FlowPane id="old-sidebar-view" fx:id="oldsidebar" alignment="TOP_CENTER" hgap="15.0" prefWrapLength="200.0"
+                  rowValignment="TOP" vgap="15.0" xmlns="http://javafx.com/javafx/8"
+                  xmlns:fx="http://javafx.com/fxml/1">
+            <children>
+                <ImageView fx:id="oldlogo" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/org-logo.png"/>
+                    </image>
+                    <FlowPane.margin>
+                        <Insets top="25.0"/>
+                    </FlowPane.margin>
+                </ImageView>
+                <TextFlow fx:id="oldOrganisationNameArea" prefWidth="200.0" textAlignment="CENTER">
+                    <children>
+                        <Text id="old-sidebar-title" fx:id="oldOrganisationName" strokeType="OUTSIDE" strokeWidth="0.0"
+                              text="NUS Students' Computing Club"/>
+                    </children>
+                    <FlowPane.margin>
+                        <Insets bottom="15.0"/>
+                    </FlowPane.margin>
+                </TextFlow>
+                <HBox id="old-sidebar-menu-combo" fx:id="oldMainButton" alignment="CENTER_LEFT" prefWidth="200.0">
+                    <children>
+                        <ImageView id="old-sidebar-menu-icon" fx:id="oldMainButtonIcon" fitHeight="30.0" fitWidth="30.0"
+                                   pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/sidebar-icon-main.png"/>
+                            </image>
+                        </ImageView>
+                        <Label id="old-sidebar-menu-label" fx:id="oldMainButtonLabel" text="Main"/>
+                    </children>
+                    <FlowPane.margin>
+                        <Insets left="30.0"/>
+                    </FlowPane.margin>
+                </HBox>
+                <HBox id="old-sidebar-menu-combo" fx:id="oldLoadSaveButton" alignment="CENTER_LEFT" prefWidth="200.0">
+                    <children>
+                        <ImageView id="old-sidebar-menu-icon" fx:id="oldLoadSaveButtonIcon" fitHeight="30.0" fitWidth="30.0"
+                                   pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/sidebar-icon-file.png"/>
+                            </image>
+                        </ImageView>
+                        <Label id="old-sidebar-menu-label" fx:id="oldLoadSaveButtonLabel" text="Load/Save"/>
+                    </children>
+                    <FlowPane.margin>
+                        <Insets left="30.0"/>
+                    </FlowPane.margin>
+                </HBox>
+                <HBox id="old-sidebar-menu-combo" fx:id="oldStatisticsButton" alignment="CENTER_LEFT" prefWidth="200.0">
+                    <children>
+                        <ImageView id="old-sidebar-menu-icon" fx:id="oldStatisticsButtonIcon" fitHeight="30.0" fitWidth="30.0"
+                                   pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/sidebar-icon-stats.png"/>
+                            </image>
+                        </ImageView>
+                        <Label id="old-sidebar-menu-label" fx:id="oldStatisticsButtonLabel" text="Statistics"/>
+                    </children>
+                    <FlowPane.margin>
+                        <Insets left="30.0"/>
+                    </FlowPane.margin>
+                </HBox>
+                <HBox id="old-sidebar-menu-combo" fx:id="oldSettingsButton" alignment="CENTER_LEFT" prefWidth="200.0">
+                    <children>
+                        <ImageView id="old-sidebar-menu-icon" fx:id="oldSettingsButtonIcon" fitHeight="30.0" fitWidth="30.0"
+                                   pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/sidebar-icon-settings.png"/>
+                            </image>
+                        </ImageView>
+                        <Label id="old-sidebar-menu-label" fx:id="oldSettingsButtonLabel" text="Settings"/>
+                    </children>
+                    <FlowPane.margin>
+                        <Insets left="30.0"/>
+                    </FlowPane.margin>
+                </HBox>
+            </children>
+        </FlowPane>
+    </left>
+    <center>
+        <BorderPane id="old-center-view" fx:id="oldcenterview" xmlns="http://javafx.com/javafx/8"
+                    xmlns:fx="http://javafx.com/fxml/1">
+            <top>
+                <HBox id="old-menu-view" fx:id="oldmenu" alignment="CENTER_RIGHT" prefHeight="30.0"
+                      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+                    <children>
+                        <Circle id="old-maximise-button" fx:id="oldMaximiseButton" radius="7.0"/>
+                        <Circle id="old-minimise-button" fx:id="oldMinimiseButton" radius="7.0"/>
+                        <Circle id="old-close-button" fx:id="oldCloseButton" radius="7.0">
+                            <HBox.margin>
+                                <Insets right="8.0"/>
+                            </HBox.margin>
+                        </Circle>
+                    </children>
+                </HBox>
+            </top>
+            <bottom>
+                <HBox id="old-snackbar-view" fx:id="oldsnackbar" prefHeight="30.0" xmlns="http://javafx.com/javafx/8"
+                      xmlns:fx="http://javafx.com/fxml/1"/>
+            </bottom>
+            <center>
+                <BorderPane fx:id="oldpage" BorderPane.alignment="CENTER"/>
+            </center>
+        </BorderPane>
+    </center>
+</BorderPane>
