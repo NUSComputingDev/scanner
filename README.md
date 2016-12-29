@@ -114,7 +114,7 @@ In the future, we aim to create event factories that allows us to customise and 
             |   +-- SoCScanner.java #[GUI entrypoint/main app]
         |   +-- objects #[models/data structures]
         |   +-- scanners
-            |   +-- APDUCommands.java                #[protocols for card reading]
+            |   +-- APDUCommands.java                #[protocols for card reading; stubbed for security]
             |   +-- APDUStatusChecker.java           #[demystify scanner status codes]
             |   +-- MatricCardScanner.java           #[scanner entrypoint]
             |   +-- MatricCardScannerExceptions.java #[exceptions]
