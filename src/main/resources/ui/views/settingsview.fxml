@@ -1,7 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.text.Text?>
 <BorderPane id="settings-view" fx:id="settingsview" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1">
-
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.SettingsPageController">
+    <center>
+        <VBox layoutX="14.0" layoutY="14.0" prefHeight="246.0" prefWidth="273.0">
+            <children>
+                <Label prefHeight="17.0" prefWidth="200.0" alignment="CENTER" text="Encryption">
+                    <VBox.margin>
+                        <Insets left="20.0" top="20.0"/>
+                    </VBox.margin>
+                </Label>
+                <HBox prefHeight="29.0" prefWidth="156.0">
+                    <children>
+                        <Label prefHeight="17.0" prefWidth="43.0" text="keyA: " />
+                        <PasswordField id="key-A" fx:id="keyA" prefHeight="27.0" prefWidth="119.0" />
+                        <Label prefHeight="17.0" prefWidth="60.0" />
+                    </children>
+                    <VBox.margin>
+                        <Insets left="20.0"/>
+                    </VBox.margin>
+                </HBox>
+                <HBox prefHeight="34.0" prefWidth="156.0">
+                    <children>
+                        <Label prefHeight="17.0" prefWidth="42.0" text="keyB: " />
+                        <PasswordField id="key-B" fx:id="keyB" prefHeight="27.0" prefWidth="119.0" />
+                        <Label prefHeight="17.0" prefWidth="60.0" />
+                    </children>
+                    <VBox.margin>
+                        <Insets left="20.0" />
+                    </VBox.margin>
+                </HBox>
+                <Button id="key-submit" fx:id="keySubmit"  onAction="#keySubmission"
+                        mnemonicParsing="false" text="Submit">
+                    <VBox.margin>
+                        <Insets left="20.0" />
+                    </VBox.margin>
+                </Button>
+                <Separator prefWidth="100.0">
+                    <padding>
+                        <Insets left="20.0" top="10.0"/>
+                    </padding>
+                </Separator>
+                <Label prefHeight="17.0" prefWidth="200.0" alignment="CENTER" text="Excel configuration">
+                    <VBox.margin>
+                        <Insets left="20.0" top="20.0"/>
+                    </VBox.margin>
+                </Label>
+                <HBox prefHeight="29.0" prefWidth="156.0">
+                    <children>
+                        <Label prefHeight="17.0" prefWidth="100.0" text="File: " />
+                        <TextField id="file-name" fx:id="fileName" prefHeight="27.0" prefWidth="119.0" />
+                        <Label id="file-name-error" fx:id="fileNameError" prefHeight="17.0" prefWidth="120.0">
+                            <padding>
+                                <Insets left="10"></Insets>
+                            </padding>
+                        </Label>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="20.0"/>
+                    </VBox.margin>
+                </HBox>
+                <HBox prefHeight="29.0" prefWidth="156.0">
+                    <children>
+                        <Label prefHeight="17.0" prefWidth="100.0" text="Sheet Number: " />
+                        <TextField id="sheet-number" fx:id="sheetNumber" prefHeight="27.0" prefWidth="119.0" />
+                        <Label id="sheet-number-error" fx:id="sheetNumberError" text="default is 0" prefHeight="17.0" prefWidth="120.0">
+                            <padding>
+                                <Insets left="10"></Insets>
+                            </padding>
+                        </Label>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="20.0"/>
+                    </VBox.margin>
+                </HBox>
+                <HBox prefHeight="34.0" prefWidth="156.0">
+                    <children>
+                        <Label prefHeight="17.0" prefWidth="100.0" text="row: " />
+                        <TextField id="row" fx:id="row" prefHeight="27.0" prefWidth="119.0" />
+                        <Label id="row-error" fx:id="rowError" prefHeight="17.0" prefWidth="120.0">
+                            <padding>
+                                <Insets left="10"></Insets>
+                            </padding>
+                        </Label>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="20.0" />
+                    </VBox.margin>
+                </HBox>
+                <HBox prefHeight="34.0" prefWidth="156.0">
+                    <children>
+                        <Label prefHeight="17.0" prefWidth="100.0" text="column: " />
+                        <TextField id="column" fx:id="column" prefHeight="27.0" prefWidth="119.0" />
+                        <Label id="column-error" fx:id="columnError" prefHeight="17.0" prefWidth="120.0">
+                            <padding>
+                                <Insets left="10"></Insets>
+                            </padding>
+                        </Label>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="20.0" />
+                    </VBox.margin>
+                </HBox>
+                <Button id="excel-submit" fx:id="excelSubmit"  onAction="#excelSubmission"
+                        mnemonicParsing="false" text="Submit">
+                    <VBox.margin>
+                        <Insets left="20.0" />
+                    </VBox.margin>
+                </Button>
+            </children>
+        </VBox>
+    </center>
 </BorderPane>

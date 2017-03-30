@@ -1,6 +1,8 @@
 package ui.controllers;
 
 import java.util.logging.*;
+
+import database.io.XLSMWriter;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
@@ -18,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import main.SoCScanner;
+import scanners.MatricCardScanner;
 import utilities.external.ResizeHelper;
 
 import static javafx.scene.input.MouseEvent.*;
@@ -116,6 +119,11 @@ public class RootController {
 
     // Controllers
     MainPageController mainPageController = null;
+    SettingsPageController settingsPageController = null;
+
+    // Scanner
+    MatricCardScanner scanner = null;
+    XLSMWriter writer = null;
 
     public RootController() {
 
@@ -128,18 +136,29 @@ public class RootController {
 
             setMenuButtonCallbacks();
 
+            scanner = new MatricCardScanner();
+            writer = new XLSMWriter();
+
             // Set pages
             FXMLLoader loader = new FXMLLoader(getClass().getResource(DIRECTORY_MAIN));
             mainPage = loader.load();
             mainPageController = loader.getController();
+            mainPageController.setScanner(scanner);
+            mainPageController.setWriter(writer);
 
             loadSavePage = FXMLLoader.load(getClass().getResource(DIRECTORY_DATA));
 //            RootController rootControl = new RootController();
 //            rootControl.setMainApp(this);
+
             statisticsPage = FXMLLoader.load(getClass().getResource(DIRECTORY_ANALYTICS));
 //            RootController rootControl = new RootController();
 //            rootControl.setMainApp(this);
-            settingsPage = FXMLLoader.load(getClass().getResource(DIRECTORY_SETTINGS));
+
+            FXMLLoader settingsLoader = new FXMLLoader(getClass().getResource(DIRECTORY_SETTINGS));
+            settingsPage = settingsLoader.load();
+            settingsPageController = settingsLoader.getController();
+            settingsPageController.setScanner(scanner);
+            settingsPageController.setWrite(writer);
 //            RootController rootControl = new RootController();
 //            rootControl.setMainApp(this);
 

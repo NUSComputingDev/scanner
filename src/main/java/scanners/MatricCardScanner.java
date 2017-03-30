@@ -1,5 +1,6 @@
 package scanners;
 
+import objects.Scan;
 import java.util.logging.*;
 import javax.smartcardio.*;
 import java.util.Arrays;
@@ -20,8 +21,8 @@ import java.util.List;
 public class MatricCardScanner implements MatricCardScannerUtilities {
 
     // To be connected to UI as User Input
-    String keyA = "";
-    String keyB = "";
+    public String keyA = "";
+    public String keyB = "";
 
     // PROTOCOLS //
     private static final String DEFAULT_PROTOCOL = "*";
@@ -78,10 +79,11 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
 
     public static void main(String[] args) {
         boolean scanned = false;
+        MatricCardScanner scanner = new MatricCardScanner();
 
         while (!scanned) {
             try {
-                scanCardInfo();
+                scanner.scanCardInfo();
                 scanned = true;
             } catch (Exception exception) {
                 // TODO: Can utilise different catch clauses to handle different exceptions
@@ -100,33 +102,36 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
      *
      * @throws Exception
      */
-    private static void scanCardInfo() throws Exception {
+    public Scan scanCardInfo() throws Exception {
 
         // TODO: Change return type to CardInfo and wrap information within
 
         try {
             // Connect with terminal and card
-            MatricCardScanner scanner = new MatricCardScanner();
-            CardTerminal terminal = scanner.getScanTerminal(null, null, null);
+//            MatricCardScanner scanner = new MatricCardScanner();
+            CardTerminal terminal = getScanTerminal(null, null, null);
 
             // Check if terminal is ACR122U variant that uses PN532 connection
-            if (terminal.isCardPresent() && terminal.getName().contains(TERMINAL_NAMETAG_ACR)) {
-                isACRTerminal = true;
-            }
+//            if (terminal.isCardPresent() && terminal.getName().contains(TERMINAL_NAMETAG_ACR)) {
+//                isACRTerminal = true;
+//            }
+            isACRTerminal = true;
 
-            Card matriculationCard = scanner.connectCard(terminal, DEFAULT_PROTOCOL);
-            scanner.getCardSerialNumber(matriculationCard);
+            Card matriculationCard = connectCard(terminal, DEFAULT_PROTOCOL);
+            getCardSerialNumber(matriculationCard);
 
             // Authenticate and read from Block #1
-            byte[] blockOne = scanner.authenticateAndReadBlock(matriculationCard, 1);
-            String matricNumber = scanner.getMatricNumber(blockOne);
+            byte[] blockOne = authenticateAndReadBlock(matriculationCard, 1);
+            String matricNumber = getMatricNumber(blockOne);
+
 
             // Authenticate and read from Block #2
-            byte[] blockTwo = scanner.authenticateAndReadBlock(matriculationCard, 2);
-            String accessCode = scanner.getAccessCode(blockTwo);
+            byte[] blockTwo = authenticateAndReadBlock(matriculationCard, 2);
+            String accessCode = getAccessCode(blockTwo);
 
             // Disconnect card
-            scanner.disconnectCard(matriculationCard);
+            disconnectCard(matriculationCard);
+            return new Scan(matricNumber, accessCode);
 
         } catch (Exception exception) {
             throw exception;
@@ -137,6 +142,7 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
     public CardTerminal getScanTerminal() throws Exception {
 
         try {
+
 
             // Finds the terminal(s) with card present
             TerminalFactory factory = TerminalFactory.getDefault();
@@ -149,11 +155,11 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
             }
 
             // For debugging: outputs all the detected terminals
-            for (int i = 1; i <= terminalList.size(); ++i) {
-                CardTerminal terminal = terminalList.get(i - 1);
-                String detectedOutput = String.format(MESSAGE_DETECTED_TERMINAL, i, terminal.getName());
-                Logger.getLogger("").info(detectedOutput);
-            }
+//            for (int i = 1; i <= terminalList.size(); ++i) {
+//                CardTerminal terminal = terminalList.get(i - 1);
+//                String detectedOutput = String.format(MESSAGE_DETECTED_TERMINAL, i, terminal.getName());
+//                Logger.getLogger("").info(detectedOutput);
+//            }
 
             // Handles multiple detected terminals
             if (terminalList.size() > 1) {
@@ -166,7 +172,6 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
             return terminal;
 
         } catch (Exception exception) {
-
             // TODO: Logging
 
             throw exception;
@@ -219,7 +224,6 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
             return terminal;
 
         } catch (Exception exception) {
-
             // TODO: Logging
 
             throw exception;
@@ -252,17 +256,14 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
 
             // Establish connection with card
             Card matricCard = scanner.connect(protocol);
-
             String codeATR = getCardATRCode(matricCard);
-            String outputMessage = String.format(MESSAGE_CARD_ATR_OUTPUT, codeATR);
-            Logger.getLogger("").info(outputMessage);
+//            String outputMessage = String.format(MESSAGE_CARD_ATR_OUTPUT, codeATR);
+//            Logger.getLogger("").info(outputMessage);
 
             // TODO: Logging
-
             return matricCard;
 
         } catch (Exception exception) {
-
             // TODO: Logging
             throw exception;
         }
@@ -271,7 +272,6 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
 
     @Override
     public String getCardATRCode(Card matriculationCard) throws Exception {
-
         byte[] bytesATR = matriculationCard.getATR().getBytes();
         return bytesToHexString(bytesATR);
 
@@ -288,13 +288,13 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
             // Obtain Card Serial Number
             byte[] serialNumber = getCardSerialNumberBytes(matriculationCard);
 
-            CommandAPDU commandMessage = null;
-            ResponseAPDU responseMessage = null;
+            CommandAPDU commandMessage;
+            ResponseAPDU responseMessage;
 
             // Only load Authentication Key when standard PC/SC communication terminal is used
             if (!isACRTerminal) {
                 // Send Authentication Command
-                commandMessage = APDUCommandsStub.getAPDUDecryptCommand(serialNumber, keyA, keyB);
+                commandMessage = APDUCommands.getAPDUDecryptCommand(serialNumber, keyA, keyB);
                 responseMessage = channel.transmit(commandMessage);
                 displayAPDUExchange(commandMessage, responseMessage, TITLE_SEND_AUTHENTICATE_KEY);
             }
@@ -308,9 +308,8 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
 
                     // Build Authenticate Command for PN532 connection mode
                     if (isACRTerminal) {
-
                         // Append computed key
-                        byte[] commandA = APDUCommandsStub.appendCommandBytesWithKey(serialNumber, APDUCommandsStub.APDUCOMMAND_AUTHENTICATE_BLOCK_A_ACR, keyA, keyB);
+                        byte[] commandA = APDUCommands.appendCommandBytesWithKey(serialNumber, APDUCommands.APDUCOMMAND_AUTHENTICATE_BLOCK_A_ACR, keyA, keyB);
 
                         // Append UID
                         byte[] commandBytesA = new byte[commandA.length + serialNumber.length];
@@ -322,7 +321,7 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
 
                         // Use preset Authentication Command for standard connection
                     } else {
-                        commandMessage = APDUCommandsStub.APDUCOMMAND_AUTHENTICATE_BLOCK_A;
+                        commandMessage = APDUCommands.APDUCOMMAND_AUTHENTICATE_BLOCK_A;
                     }
 
                     // Communicate Command
@@ -334,11 +333,11 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
 
                     // Use modified Read Command for PN532 connection mode
                     if (isACRTerminal) {
-                        commandMessage = APDUCommandsStub.APDUCOMMAND_READ_BLOCK_A_ACR;
+                        commandMessage = APDUCommands.APDUCOMMAND_READ_BLOCK_A_ACR;
 
                         // Use standard Read Command for standard connection
                     } else {
-                        commandMessage = APDUCommandsStub.APDUCOMMAND_READ_BLOCK_A;
+                        commandMessage = APDUCommands.APDUCOMMAND_READ_BLOCK_A;
                     }
 
                     // Communicate Command
@@ -362,7 +361,7 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
                     if (isACRTerminal) {
 
                         // Append computed key
-                        byte[] commandB = APDUCommandsStub.appendCommandBytesWithKey(serialNumber, APDUCommandsStub.APDUCOMMAND_AUTHENTICATE_BLOCK_B_ACR, keyA, keyB);
+                        byte[] commandB = APDUCommands.appendCommandBytesWithKey(serialNumber, APDUCommands.APDUCOMMAND_AUTHENTICATE_BLOCK_B_ACR, keyA, keyB);
 
                         // Append UID
                         byte[] commandBytesB = new byte[commandB.length + serialNumber.length];
@@ -374,7 +373,7 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
 
                         // Use preset Authentication Command for standard connection
                     } else {
-                        commandMessage = APDUCommandsStub.APDUCOMMAND_AUTHENTICATE_BLOCK_B;
+                        commandMessage = APDUCommands.APDUCOMMAND_AUTHENTICATE_BLOCK_B;
                     }
 
                     // Communicate Command
@@ -386,11 +385,10 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
 
                     // Use modified Read Command for PN532 connection mode
                     if (isACRTerminal) {
-                        commandMessage = APDUCommandsStub.APDUCOMMAND_READ_BLOCK_B_ACR;
-
+                        commandMessage = APDUCommands.APDUCOMMAND_READ_BLOCK_B_ACR;
                         // Use standard Read Command for standard connection
                     } else {
-                        commandMessage = APDUCommandsStub.APDUCOMMAND_READ_BLOCK_B;
+                        commandMessage = APDUCommands.APDUCOMMAND_READ_BLOCK_B;
                     }
 
                     // Communicate Command
@@ -412,8 +410,7 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
             }
 
         } catch (Exception exception) {
-            Logger.getLogger("").info(exception.getStackTrace().toString());
-            exception.printStackTrace();
+//            Logger.getLogger("").info(exception.getStackTrace().toString());
             throw exception;
         }
 
@@ -453,15 +450,15 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
 
             // Prompt for card serial number
             CommandAPDU commandMessage;
+
             if (isACRTerminal) {
-                commandMessage = APDUCommandsStub.APDUCOMMAND_READ_SERIAL_NUMBER_ACR;
+                commandMessage = APDUCommands.APDUCOMMAND_READ_SERIAL_NUMBER_ACR;
             } else {
-                commandMessage = APDUCommandsStub.APDUCOMMAND_READ_SERIAL_NUMBER;
+                commandMessage = APDUCommands.APDUCOMMAND_READ_SERIAL_NUMBER;
             }
 
             ResponseAPDU responseMessage = channel.transmit(commandMessage);
             displayAPDUExchange(commandMessage, responseMessage, TITLE_READ_SERIAL);
-
             byte[] responseBytes = responseMessage.getData();
 
             // TODO: Filter response for serial number
@@ -484,10 +481,8 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
             return serialNumber;
 
         } catch (Exception exception) {
-
             // TODO: Logging
             Logger.getLogger("").info(exception.getStackTrace().toString());
-            exception.printStackTrace();
             throw exception;
         }
 
@@ -504,9 +499,9 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
             // Prompt for card serial number
             CommandAPDU commandMessage;
             if (isACRTerminal) {
-                commandMessage = APDUCommandsStub.APDUCOMMAND_READ_SERIAL_NUMBER_ACR;
+                commandMessage = APDUCommands.APDUCOMMAND_READ_SERIAL_NUMBER_ACR;
             } else {
-                commandMessage = APDUCommandsStub.APDUCOMMAND_READ_SERIAL_NUMBER;
+                commandMessage = APDUCommands.APDUCOMMAND_READ_SERIAL_NUMBER;
             }
 
             ResponseAPDU responseMessage = channel.transmit(commandMessage);
@@ -666,11 +661,11 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
         String titleOutput = String.format(FORMATTED_TITLE, genTitle);
 
         // Display Output
-        Logger.getLogger("").info(titleOutput);
-        Logger.getLogger("").info(commandOutput);
-        Logger.getLogger("").info(responseOutput);
-        Logger.getLogger("").info(responseStatusOutput);
-        Logger.getLogger("").info(responseDataOutput);
+//        Logger.getLogger("").info(titleOutput);
+//        Logger.getLogger("").info(commandOutput);
+//        Logger.getLogger("").info(responseOutput);
+//        Logger.getLogger("").info(responseStatusOutput);
+//        Logger.getLogger("").info(responseDataOutput);
 
         if (!hexResponseStatusFlag.equals(STATUS_NORMAL)) {
             Logger.getLogger("").warning(FLAG_UNSUCCESSFUL);

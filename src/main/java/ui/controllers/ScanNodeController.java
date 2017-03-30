@@ -52,11 +52,11 @@ public class ScanNodeController {
 
         matricNumber.setText(scan.getMatricNumber());
         accessCode.setText(scan.getAccessCode());
-        dateTimeStamp.setText(scan.getDateTimeStamp());
-        details.setText(HEADER_DETAILS + scan.getDetailsField());
+//        dateTimeStamp.setText(scan.getDateTimeStamp());
+//        details.setText(HEADER_DETAILS + scan.getDetailsField());
 
         nameArea.maxWidthProperty().bind(list.widthProperty().subtract(SIZE_PADDING_NAME));
-        detailsArea.maxWidthProperty().bind(list.widthProperty().subtract(SIZE_PADDING_DETAILS));
+//        detailsArea.maxWidthProperty().bind(list.widthProperty().subtract(SIZE_PADDING_DETAILS));
 
     }
 

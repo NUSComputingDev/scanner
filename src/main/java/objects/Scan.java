@@ -38,6 +38,11 @@ public class Scan {
 
     }
 
+    public Scan(String matricNumber, String accessCode) {
+        this.matricNumber = new SimpleStringProperty(matricNumber);
+        this.accessCode = new SimpleStringProperty(accessCode);
+    }
+
 
 //    public StringProperty getFullNameProperty() {
 //        return this.fullName;

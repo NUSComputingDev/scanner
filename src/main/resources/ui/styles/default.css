@@ -206,6 +206,22 @@
     -fx-stroke-type: inside;
 }
 
+#scanbutton {
+    -fx-background-color: #000000,
+    linear-gradient(#66CCCC, #388E8E),
+    linear-gradient(#66CCCC, #388E8E),
+    linear-gradient(#66CCCC, #388E8E);
+    -fx-background-insets: 0, 1, 2, 3;
+    -fx-background-radius: 3, 2, 2, 2;
+    -fx-padding: 8 16 8 16;
+    -fx-font-family: "Roboto Condensed Bold";
+    -fx-font-size: 14px;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+    -fx-text-fill: #ECECEA;
+
+}
+
 #accept-button {
     -fx-background-color: #000000,
     linear-gradient(#8dc26f, #76b852),
