@@ -93,6 +93,10 @@ In the future, we aim to create event factories that allows us to customise and 
         compile ([group: 'com.intellij', name: 'annotations', version: '9.0.4']) 
     }
     ```
+
+#### Building the jar app
+  1. Run ``` gradle clean ```
+  2. Run ``` gradle fatjar build ```
     
 #### Project Structure Highlight
 
