@@ -1,17 +1,15 @@
 package ui.controllers;
 
-import database.io.XLSMWriter;
-import database.io.XMLSheetReader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.util.Callback;
+import logic.validation.Validity;
 import main.SoCScanner;
 import objects.Scan;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -19,28 +17,41 @@ import org.jasypt.exceptions.EncryptionOperationNotPossibleException;
 import scanners.MatricCardScanner;
 import scanners.MatricCardScannerExceptions;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 public class MainPageController {
 
     @FXML
-    private ImageView idIcon;
-
-    @FXML
     private Label matricNumberLabel;
 
     @FXML
-    private Label accessCodeLabel;
+    private Label resultMessage;
+
+    @FXML
+    private Button scanButton;
+
+    @FXML
+    private Label nameLabel;
+
+    @FXML
+    private Label degreeLabel;
+
+    @FXML
+    private Button acceptButton;
+
+    @FXML
+    private Button rejectButton;
 
     private static ObservableList<Scan> scansToDisplay = null;
     private static SoCScanner mainApplication = null;
     private MatricCardScanner scanner = null;
-    private XLSMWriter writer = null;
-    private Boolean isScanning = false;
+    private Validity validity = null;
+    private Scan currentCard = null;
 
     // Stub Data
     private static Scan[] stubScans = new Scan[8];
@@ -86,9 +97,7 @@ public class MainPageController {
         this.scanner = scanner;
     }
 
-    public void setWriter(XLSMWriter writer) {
-        this.writer = writer;
-    }
+    public void setValidity(Validity validity) { this.validity = validity; }
 
 
     @FXML
@@ -98,49 +107,71 @@ public class MainPageController {
     }
 
     @FXML
-    public void scanCard(ActionEvent event) {
-        if (scanner.keyA.isEmpty() || scanner.keyB.isEmpty()) {
-            accessCodeLabel.setText("Authentication empty");
+    public void verifyCard(ActionEvent event) {
+        disableButtons();
+        if (scanner.isAuthenticationEmpty()) {
+            resultMessage.setText("Authentication empty");
             return;
         }
 
-        if (!isScanning) {
-            isScanning = true;
+        try {
+            Scan scanObj = getCardInfo();
+            currentCard = scanObj;
+            matricNumberLabel.setText(scanObj.getMatricNumber());
+
+            String faculty = validity.facultyOfPerson(scanObj);
+            if (faculty.equals("Non-SoC")) {
+                degreeLabel.setText(faculty);
+                resultMessage.setText("Non-SoC student");
+
+                invalidPerson();
+                return;
+            } else {
+                degreeLabel.setText(faculty);
+                scanObj.setFaculty(faculty);
+            }
+
+            if (!validity.doneSurvey(scanObj)) {
+                resultMessage.setText("Survey not done!!");
+                invalidPerson();
+                return;
+            } else {
+                String name = validity.getName(scanObj);
+                nameLabel.setText(name);
+                scanObj.setFullName(name);
+            }
+
+            if (validity.hasCollected(scanObj)) {
+                resultMessage.setText("Student has collected before!!!");
+                invalidPerson();
+                return;
+            }
+
+            enableButtons();
+            resultMessage.setText("Person is legit!!");
+
+        } catch (MatricCardScannerExceptions.NoTerminalException nte) {
+            enableScan();
+            resultMessage.setText("No card detected");
+        } catch (InvalidFormatException | IOException e) {
+            enableScan();
+            resultMessage.setText("File write error");
+        } catch (EncryptionOperationNotPossibleException eonpe) {
+            enableScan();
+            resultMessage.setText("Authentication failed");
+        } catch (Exception e) {
+            enableScan();
+            resultMessage.setText("Unexpected error");
             try {
-                Scan scanObj = getCardInfo();
-
-                matricNumberLabel.setText(scanObj.getMatricNumber());
-                isScanning = false;
-                accessCodeLabel.setText("Authenticated");
-                scansToDisplay.add(0, scanObj);
-
-                if (writer.isValid()) {
-                    writer.write(scanObj.getMatricNumber());
-                }
-            } catch (MatricCardScannerExceptions.NoTerminalException nte) {
-                isScanning = false;
-                accessCodeLabel.setText("No card detected");
-            } catch (InvalidFormatException | IOException e) {
-                isScanning = false;
-                accessCodeLabel.setText("File write error");
-            } catch (EncryptionOperationNotPossibleException eonpe) {
-                isScanning = false;
-                accessCodeLabel.setText("Authentication failed");
-            } catch (Exception e) {
-                isScanning = false;
-                accessCodeLabel.setText("Unexpected error");
-                try {
-                    Logger logger = Logger.getLogger("log");
-                    FileHandler fh = new FileHandler("./scanner.log");
-                    logger.addHandler(fh);
-                    logger.severe(Arrays.toString(e.getStackTrace()));
-
-                } catch (Exception except) {
-                    return;
-                }
-
+                Logger logger = Logger.getLogger("log");
+                FileHandler fh = new FileHandler("./scanner.log");
+                logger.addHandler(fh);
+                logger.severe(Arrays.toString(e.getStackTrace()));
+            } catch (Exception except) {
+                return;
             }
         }
+
     }
 
     private Scan getCardInfo() throws Exception {
@@ -150,8 +181,52 @@ public class MainPageController {
         } catch (Exception exception) {
             throw exception;
         }
-
         return scanObj;
+    }
+
+    private void invalidPerson() {
+        enableButtons();
+        acceptButton.setDisable(true);
+    }
+
+    @FXML
+    public void acceptPerson(ActionEvent event) {
+        currentCard.setDetailsField("collected");
+        currentCard.setDateTimeStamp(validity.getTimeStamp());
+        scansToDisplay.add(0, currentCard);
+        validity.recordCollection(currentCard);
+        resetDisplay();
+    }
+
+    @FXML
+    public void rejectPerson(ActionEvent event) {
+        currentCard.setDetailsField("rejected");
+        currentCard.setDateTimeStamp(validity.getTimeStamp());
+        scansToDisplay.add(0,currentCard);
+        resetDisplay();
+    }
+
+    private void resetDisplay() {
+        matricNumberLabel.setText("Card Number");
+        nameLabel.setText("Full Name");
+        degreeLabel.setText("Degree(s) and Major(s)");
+        resultMessage.setText("Click Scan to get data");
+    }
+
+    private void disableButtons() {
+        scanButton.setDisable(true);
+        acceptButton.setDisable(true);
+        rejectButton.setDisable(true);
+    }
+
+    private void enableButtons() {
+        scanButton.setDisable(false);
+        acceptButton.setDisable(false);
+        rejectButton.setDisable(false);
+    }
+
+    private void enableScan() {
+        scanButton.setDisable(false);
     }
 
     public void initScanListView() {

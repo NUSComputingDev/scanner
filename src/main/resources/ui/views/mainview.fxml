@@ -41,19 +41,13 @@
                                                         <Insets left="30.0" top="5.0"/>
                                                     </VBox.margin>
                                                 </Label>
-                                                <Label id="access-code-label" fx:id="accessCodeLabel"
-                                                       text="Authenticate key">
-                                                    <VBox.margin>
-                                                        <Insets bottom="20.0" left="30.0"/>
-                                                    </VBox.margin>
-                                                </Label>
                                             </children>
                                         </VBox>
                                         <VBox id="to-scan-area" fx:id="toScanArea" alignment="CENTER"
                                               spacing="15.0">
                                             <children>
                                                 <Button id="scan-button" fx:id="scanButton" mnemonicParsing="false"
-                                                        onAction="#scanCard" text="SCAN">
+                                                        onAction="#verifyCard" text="SCAN">
                                                 </Button>
                                             </children>
                                             <HBox.margin>
@@ -67,110 +61,98 @@
                                         <Insets left="10.0"/>
                                     </padding>
                                 </Separator>
-                                <!--<HBox id="file-info-area" fx:id="fileInfoArea" alignment="CENTER_LEFT"-->
-                                      <!--prefHeight="100.0" prefWidth="200.0">-->
-                                    <!--<children>-->
-                                        <!--<ImageView id="person-icon" fx:id="personIcon" fitHeight="80.0" fitWidth="80.0"-->
-                                                   <!--pickOnBounds="true"-->
-                                                   <!--preserveRatio="true" HBox.hgrow="ALWAYS">-->
-                                            <!--<image>-->
-                                                <!--<Image url="@../images/person-icon.png"/>-->
-                                            <!--</image>-->
-                                            <!--<HBox.margin>-->
-                                                <!--<Insets bottom="10.0" left="50.0"/>-->
-                                            <!--</HBox.margin>-->
-                                        <!--</ImageView>-->
-                                        <!--<VBox id="file-info-text-area" fx:id="fileInfoTextArea" alignment="CENTER_LEFT"-->
-                                              <!--prefHeight="200.0" prefWidth="100.0" spacing="5.0"-->
-                                              <!--HBox.hgrow="ALWAYS">-->
-                                            <!--<children>-->
-                                                <!--<Label id="name-label" fx:id="nameLabel" text="Full Name">-->
-                                                    <!--<VBox.margin>-->
-                                                        <!--<Insets left="50.0" top="5.0"/>-->
-                                                    <!--</VBox.margin>-->
-                                                <!--</Label>-->
-                                                <!--<Label id="degree-label" fx:id="degreeLabel"-->
-                                                       <!--text="Degree(s) and Major(s)">-->
-                                                    <!--<VBox.margin>-->
-                                                        <!--<Insets left="50.0"/>-->
-                                                    <!--</VBox.margin>-->
-                                                <!--</Label>-->
+                                <HBox id="file-info-area" fx:id="fileInfoArea" alignment="CENTER_LEFT"
+                                      prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                        <ImageView id="person-icon" fx:id="personIcon" fitHeight="80.0" fitWidth="80.0"
+                                                   pickOnBounds="true"
+                                                   preserveRatio="true" HBox.hgrow="ALWAYS">
+                                            <image>
+                                                <Image url="@../images/person-icon.png"/>
+                                            </image>
+                                            <HBox.margin>
+                                                <Insets bottom="10.0" left="50.0"/>
+                                            </HBox.margin>
+                                        </ImageView>
+                                        <VBox id="file-info-text-area" fx:id="fileInfoTextArea" alignment="CENTER_LEFT"
+                                              prefHeight="200.0" prefWidth="100.0" spacing="5.0"
+                                              HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label id="name-label" fx:id="nameLabel" text="Full Name">
+                                                    <VBox.margin>
+                                                        <Insets left="50.0" top="5.0"/>
+                                                    </VBox.margin>
+                                                </Label>
+                                                <Label id="degree-label" fx:id="degreeLabel"
+                                                       text="Degree(s) and Major(s)">
+                                                    <VBox.margin>
+                                                        <Insets left="50.0"/>
+                                                    </VBox.margin>
+                                                </Label>
                                                 <!--<Label id="year-label" fx:id="yearLabel" text="Year">-->
                                                     <!--<VBox.margin>-->
                                                         <!--<Insets bottom="20.0" left="50.0"/>-->
                                                     <!--</VBox.margin>-->
                                                 <!--</Label>-->
-                                            <!--</children>-->
-                                        <!--</VBox>-->
-                                    <!--</children>-->
-                                <!--</HBox>-->
-                                <!--<Separator prefWidth="200.0">-->
-                                    <!--<padding>-->
-                                        <!--<Insets left="10.0"/>-->
-                                    <!--</padding>-->
-                                <!--</Separator>-->
-                                <!--<HBox id="scan-result-info-area" fx:id="scanResultInfoArea" alignment="CENTER"-->
-                                      <!--prefHeight="100.0" prefWidth="200.0" spacing="30.0">-->
-                                    <!--<children>-->
-                                        <!--<ImageView id="info-icon" fx:id="infoIcon" fitHeight="100.0" fitWidth="100.0"-->
-                                                   <!--pickOnBounds="true"-->
-                                                   <!--preserveRatio="true" HBox.hgrow="ALWAYS">-->
-                                            <!--<image>-->
-                                                <!--<Image url="@../images/info-icon.png"/>-->
-                                            <!--</image>-->
-                                            <!--<HBox.margin>-->
-                                                <!--<Insets bottom="10.0" left="40.0"/>-->
-                                            <!--</HBox.margin>-->
-                                        <!--</ImageView>-->
-                                        <!--<VBox id="scan-results" fx:id="scanResults" alignment="CENTER_LEFT"-->
-                                              <!--prefHeight="200.0" prefWidth="100.0" spacing="5.0"-->
-                                              <!--HBox.hgrow="ALWAYS">-->
-                                            <!--<children>-->
-                                                <!--<Label id="status-label" fx:id="statusLabel" text="Status Advisory">-->
-                                                    <!--<VBox.margin>-->
-                                                        <!--<Insets left="10.0" top="5.0"/>-->
-                                                    <!--</VBox.margin>-->
-                                                <!--</Label>-->
-                                                <!--<HBox alignment="CENTER_LEFT" spacing="10.0">-->
-                                                    <!--<children>-->
-                                                        <!--<ImageView id="status-icon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"-->
-                                                                   <!--preserveRatio="true">-->
-                                                            <!--<image>-->
-                                                                <!--<Image url="@../images/tick-icon.png"/>-->
-                                                            <!--</image>-->
-                                                            <!--<HBox.margin>-->
-                                                                <!--<Insets bottom="5.0" left="10.0"/>-->
-                                                            <!--</HBox.margin>-->
-                                                        <!--</ImageView>-->
-                                                        <!--<Separator orientation="VERTICAL"/>-->
-                                                        <!--<Label id="result-message" text="Woohoo! This person is LEGIT!"-->
-                                                               <!--HBox.hgrow="ALWAYS">-->
-                                                        <!--</Label>-->
-                                                    <!--</children>-->
-                                                <!--</HBox>-->
-                                            <!--</children>-->
-                                        <!--</VBox>-->
-                                        <!--<VBox id="scan-action-area" fx:id="scanActionArea" alignment="CENTER"-->
-                                              <!--spacing="15.0">-->
-                                            <!--<children>-->
-                                                <!--<Button id="accept-button" fx:id="acceptButton" mnemonicParsing="false"-->
-                                                        <!--text="ACCEPT">-->
-                                                <!--</Button>-->
-                                                <!--<Button id="reject-button" fx:id="rejectButton" mnemonicParsing="false"-->
-                                                        <!--text="REJECT">-->
-                                                <!--</Button>-->
-                                            <!--</children>-->
-                                            <!--<HBox.margin>-->
-                                                <!--<Insets left="20.0" right="10.0"/>-->
-                                            <!--</HBox.margin>-->
-                                        <!--</VBox>-->
-                                    <!--</children>-->
-                                <!--</HBox>-->
-                                <!--<Separator prefWidth="200.0">-->
-                                    <!--<padding>-->
-                                        <!--<Insets left="10.0"/>-->
-                                    <!--</padding>-->
-                                <!--</Separator>-->
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                                <Separator prefWidth="200.0">
+                                    <padding>
+                                        <Insets left="10.0"/>
+                                    </padding>
+                                </Separator>
+                                <HBox id="scan-result-info-area" fx:id="scanResultInfoArea" alignment="CENTER"
+                                      prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                                    <children>
+                                        <ImageView id="info-icon" fx:id="infoIcon" fitHeight="100.0" fitWidth="100.0"
+                                                   pickOnBounds="true"
+                                                   preserveRatio="true" HBox.hgrow="ALWAYS">
+                                            <image>
+                                                <Image url="@../images/info-icon.png"/>
+                                            </image>
+                                            <HBox.margin>
+                                                <Insets bottom="10.0" left="40.0"/>
+                                            </HBox.margin>
+                                        </ImageView>
+                                        <VBox id="scan-results" fx:id="scanResults" alignment="CENTER_LEFT"
+                                              prefHeight="200.0" prefWidth="100.0" spacing="5.0"
+                                              HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <Label id="status-label" fx:id="statusLabel" text="Status Advisory">
+                                                    <VBox.margin>
+                                                        <Insets left="10.0" top="5.0"/>
+                                                    </VBox.margin>
+                                                </Label>
+                                                <Label id="result-message" fx:id="resultMessage" text="Start by clicking the scan button">
+                                                    <VBox.margin>
+                                                        <Insets left="10.0"/>
+                                                    </VBox.margin>
+                                                </Label>
+                                            </children>
+                                        </VBox>
+                                        <VBox id="scan-action-area" fx:id="scanActionArea" alignment="CENTER"
+                                              spacing="15.0">
+                                            <children>
+                                                <Button id="accept-button" fx:id="acceptButton" mnemonicParsing="false"
+                                                        onAction="#acceptPerson" text="ACCEPT">
+                                                </Button>
+                                                <Button id="reject-button" fx:id="rejectButton" mnemonicParsing="false"
+                                                        onAction="#rejectPerson" text="REJECT">
+                                                </Button>
+                                            </children>
+                                            <HBox.margin>
+                                                <Insets left="20.0" right="10.0"/>
+                                            </HBox.margin>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                                <Separator prefWidth="200.0">
+                                    <padding>
+                                        <Insets left="10.0"/>
+                                    </padding>
+                                </Separator>
                             </children>
                         </VBox>
                         <VBox id="statistics-area" fx:id="statisticsArea"/>

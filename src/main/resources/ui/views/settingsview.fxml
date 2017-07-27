@@ -56,11 +56,11 @@
                 </Label>
                 <HBox prefHeight="29.0" prefWidth="156.0">
                     <children>
-                        <Label prefHeight="17.0" prefWidth="100.0" text="File: " />
-                        <TextField id="file-name" fx:id="fileName" prefHeight="27.0" prefWidth="119.0" />
-                        <Label id="file-name-error" fx:id="fileNameError" prefHeight="17.0" prefWidth="120.0">
+                        <Label prefHeight="17.0" prefWidth="100.0" text="Survey file: " />
+                        <TextField id="survey-file" fx:id="surveyFile" prefHeight="27.0" prefWidth="119.0" />
+                        <Label id="survey-file-error" fx:id="surveyFileError" prefHeight="17.0" prefWidth="120.0">
                             <padding>
-                                <Insets left="10"></Insets>
+                                <Insets left="10" top="10"></Insets>
                             </padding>
                         </Label>
                     </children>
@@ -70,44 +70,16 @@
                 </HBox>
                 <HBox prefHeight="29.0" prefWidth="156.0">
                     <children>
-                        <Label prefHeight="17.0" prefWidth="100.0" text="Sheet Number: " />
-                        <TextField id="sheet-number" fx:id="sheetNumber" prefHeight="27.0" prefWidth="119.0" />
-                        <Label id="sheet-number-error" fx:id="sheetNumberError" text="default is 0" prefHeight="17.0" prefWidth="120.0">
+                        <Label prefHeight="17.0" prefWidth="100.0" text="Collected File: " />
+                        <TextField id="collected-file" fx:id="collectedFile" prefHeight="27.0" prefWidth="119.0" />
+                        <Label id="collected-file-error" fx:id="collectedFileError" text="Optional" prefHeight="17.0" prefWidth="120.0">
                             <padding>
-                                <Insets left="10"></Insets>
+                                <Insets left="10" top="5"></Insets>
                             </padding>
                         </Label>
                     </children>
                     <VBox.margin>
                         <Insets left="20.0"/>
-                    </VBox.margin>
-                </HBox>
-                <HBox prefHeight="34.0" prefWidth="156.0">
-                    <children>
-                        <Label prefHeight="17.0" prefWidth="100.0" text="row: " />
-                        <TextField id="row" fx:id="row" prefHeight="27.0" prefWidth="119.0" />
-                        <Label id="row-error" fx:id="rowError" prefHeight="17.0" prefWidth="120.0">
-                            <padding>
-                                <Insets left="10"></Insets>
-                            </padding>
-                        </Label>
-                    </children>
-                    <VBox.margin>
-                        <Insets left="20.0" />
-                    </VBox.margin>
-                </HBox>
-                <HBox prefHeight="34.0" prefWidth="156.0">
-                    <children>
-                        <Label prefHeight="17.0" prefWidth="100.0" text="column: " />
-                        <TextField id="column" fx:id="column" prefHeight="27.0" prefWidth="119.0" />
-                        <Label id="column-error" fx:id="columnError" prefHeight="17.0" prefWidth="120.0">
-                            <padding>
-                                <Insets left="10"></Insets>
-                            </padding>
-                        </Label>
-                    </children>
-                    <VBox.margin>
-                        <Insets left="20.0" />
                     </VBox.margin>
                 </HBox>
                 <Button id="excel-submit" fx:id="excelSubmit"  onAction="#excelSubmission"

@@ -33,7 +33,7 @@ public class ScanNodeController {
     private Label matricNumber;
 
     @FXML
-    private Label accessCode;
+    private Label faculty;
 
     @FXML
     private Label dateTimeStamp;
@@ -50,10 +50,11 @@ public class ScanNodeController {
 
     public void initCell(Scan scan, int index, ListView list) {
 
+        name.setText(scan.getFullName());
         matricNumber.setText(scan.getMatricNumber());
-        accessCode.setText(scan.getAccessCode());
-//        dateTimeStamp.setText(scan.getDateTimeStamp());
-//        details.setText(HEADER_DETAILS + scan.getDetailsField());
+        faculty.setText(scan.getFaculty());
+        dateTimeStamp.setText(scan.getDateTimeStamp());
+        details.setText(HEADER_DETAILS + scan.getDetailsField());
 
         nameArea.maxWidthProperty().bind(list.widthProperty().subtract(SIZE_PADDING_NAME));
 //        detailsArea.maxWidthProperty().bind(list.widthProperty().subtract(SIZE_PADDING_DETAILS));

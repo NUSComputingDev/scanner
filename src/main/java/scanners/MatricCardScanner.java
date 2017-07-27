@@ -1,5 +1,6 @@
 package scanners;
 
+import logic.validation.Validity;
 import objects.Scan;
 import java.util.logging.*;
 import javax.smartcardio.*;
@@ -95,6 +96,17 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
     }
 
     /**
+     *
+     * Checks if password has been entered.
+     */
+    public Boolean isAuthenticationEmpty() {
+        if (keyA.isEmpty() || keyB.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * scanCardInfo
      * <p>
      * scanCardInfo connects with a scan terminal to read and retrieve the card details.
@@ -131,7 +143,7 @@ public class MatricCardScanner implements MatricCardScannerUtilities {
 
             // Disconnect card
             disconnectCard(matriculationCard);
-            return new Scan(matricNumber, accessCode);
+            return new Scan(matricNumber, Validity.getHash(accessCode));
 
         } catch (Exception exception) {
             throw exception;

@@ -2,6 +2,8 @@ package ui.controllers;
 
 import java.util.logging.*;
 
+import database.io.Collected;
+import database.io.Survey;
 import database.io.XLSMWriter;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
@@ -19,6 +21,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import logic.validation.Validity;
 import main.SoCScanner;
 import scanners.MatricCardScanner;
 import utilities.external.ResizeHelper;
@@ -123,7 +126,9 @@ public class RootController {
 
     // Scanner
     MatricCardScanner scanner = null;
-    XLSMWriter writer = null;
+    Collected collected = null;
+    Survey survey = null;
+    Validity validity = null;
 
     public RootController() {
 
@@ -137,14 +142,20 @@ public class RootController {
             setMenuButtonCallbacks();
 
             scanner = new MatricCardScanner();
-            writer = new XLSMWriter();
+            collected = new Collected();
+            survey = new Survey();
+            validity = new Validity();
+
+            // Set up logic
+            validity.setSurvey(survey);
+            validity.setCollected(collected);
 
             // Set pages
             FXMLLoader loader = new FXMLLoader(getClass().getResource(DIRECTORY_MAIN));
             mainPage = loader.load();
             mainPageController = loader.getController();
             mainPageController.setScanner(scanner);
-            mainPageController.setWriter(writer);
+            mainPageController.setValidity(validity);
 
             loadSavePage = FXMLLoader.load(getClass().getResource(DIRECTORY_DATA));
 //            RootController rootControl = new RootController();
@@ -158,7 +169,8 @@ public class RootController {
             settingsPage = settingsLoader.load();
             settingsPageController = settingsLoader.getController();
             settingsPageController.setScanner(scanner);
-            settingsPageController.setWrite(writer);
+            settingsPageController.setCollected(collected);
+            settingsPageController.setSurvey(survey);
 //            RootController rootControl = new RootController();
 //            rootControl.setMainApp(this);
 

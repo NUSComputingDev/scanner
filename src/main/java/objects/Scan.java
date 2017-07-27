@@ -16,7 +16,7 @@ public class Scan {
 
 
     // Properties
-//    private StringProperty fullName;
+    private StringProperty fullName;
     private StringProperty matricNumber;
     private StringProperty dateTimeStamp;
     private StringProperty detailsField;
@@ -35,26 +35,29 @@ public class Scan {
         this.dateTimeStamp = new SimpleStringProperty(dateTimeStamp);
         this.detailsField = new SimpleStringProperty(detailsField);
         this.accessCode = new SimpleStringProperty(accessCode);
-
     }
 
     public Scan(String matricNumber, String accessCode) {
+        this.fullName = new SimpleStringProperty();
         this.matricNumber = new SimpleStringProperty(matricNumber);
         this.accessCode = new SimpleStringProperty(accessCode);
+        this.dateTimeStamp = new SimpleStringProperty();
+        this.detailsField = new SimpleStringProperty();
+        this.faculty = new SimpleStringProperty();
     }
 
 
-//    public StringProperty getFullNameProperty() {
-//        return this.fullName;
-//    }
-//
-//    public void setFullName(String fullName) {
-//        this.fullName.set(fullName);
-//    }
-//
-//    public String getFullName() {
-//        return this.fullName.get();
-//    }
+    public StringProperty getFullNameProperty() {
+        return this.fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName.set(fullName);
+    }
+
+    public String getFullName() {
+        return this.fullName.get();
+    }
 
 
     public StringProperty getMatricNumberProperty() {
@@ -106,6 +109,19 @@ public class Scan {
 
     public String getAccessCode() {
         return this.accessCode.get();
+    }
+
+
+    public StringProperty getFacultyProperty() {
+        return this.faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty.set(faculty);
+    }
+
+    public String getFaculty() {
+        return this.faculty.get();
     }
 
 
@@ -172,6 +188,4 @@ public class Scan {
     public Integer getIndexNumber() {
         return this.indexNumber.get();
     }
-
-
 }

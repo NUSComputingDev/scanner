@@ -44,7 +44,7 @@
                 </VBox>
                 <VBox alignment="CENTER" maxWidth="1.7976931348623157E308">
                     <children>
-                        <Label id="cell-access-code" fx:id="accessCode" alignment="CENTER" contentDisplay="CENTER"
+                        <Label id="cell-access-code" fx:id="faculty" alignment="CENTER" contentDisplay="CENTER"
                                maxWidth="1.7976931348623157E308" text="000" textAlignment="CENTER">
                             <HBox.margin>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
