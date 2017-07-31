@@ -111,6 +111,7 @@ public class MainPageController {
         disableButtons();
         if (scanner.isAuthenticationEmpty()) {
             resultMessage.setText("Authentication empty");
+            enableScan();
             return;
         }
 
